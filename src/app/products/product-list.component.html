@@ -1,0 +1,78 @@
+
+<div *ngIf='errorMessage'
+     class='alert alert-danger'>
+  Error: {{ errorMessage }}
+</div>
+
+<div class="card">
+  <div class="card-header">
+    <div class="heading_container heading_center">
+      <h3>
+         Our <span>products</span>
+      </h3>
+   </div>
+    <div class='row'>
+      <div class='col-md-2'>Filter by:</div>
+      <div class='col-md-4'>
+        <input type='text'
+               [(ngModel)]='listFilter' />
+      </div>
+    </div>
+    <div class='row'
+         *ngIf='listFilter'>
+      <div class='col-md-6'>
+        <h4>Filtered by: {{listFilter}}</h4>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="container-fluid">
+      
+      <section class="product_section layout_padding">
+
+        <div class="container"> 
+           <div class="row" >
+              <div class="col-sm-6 col-md-4 col-lg-3" *ngFor="let product of filteredProducts">
+                 <div class="box">
+                    <div class="option_container">
+                       <div class="options">
+                          <a [routerLink]="['/products', product.id]" class="option1">
+                          {{product.name}}
+                          </a>
+                          <button (click)="addProduct(product)" onclick="alert('Item Added to Cart')" class="option2">
+                          Buy Now
+                          </button>
+                       </div>
+                    </div>
+                    <div class="img-box">
+                       <img                    [src]='product.url'
+                       [title]='product.name'
+                       >
+                    </div>
+                    <div class="detail-box">
+                       <h5>
+                        {{product.name}}
+                       </h5>
+                       <h6>
+                        {{product.price| currency:'USD':'symbol':'1.2-2'}}
+                       </h6>
+                    </div>
+                 </div>
+              </div>
+            
+           </div>
+           <div class="btn-box">
+              <a href="">
+              View Cart
+              </a>
+           </div>
+        </div>
+     </section>
+     
+
+      
+    </div>
+    
+  </div>
+</div>
+
